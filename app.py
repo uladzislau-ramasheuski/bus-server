@@ -207,5 +207,24 @@ def status():
         "stops": {sid: len(stop_data[sid]) for sid in STOPS},
         "time":  datetime.now().strftime("%H:%M:%S"),
     })
-
+@app.route("/find_stop")
+def find_stop():
+    name = request.args.get("q", "").lower()
+    if not name:
+        return jsonify({"error": "pass ?q=name"}), 400
+    try:
+        url = find_gtfs_url()
+        r = requests.get(url, timeout=60)
+        z = zipfile.ZipFile(io.BytesIO(r.content))
+        results = []
+        with z.open("stops.txt") as f:
+            for row in csv.DictReader(io.TextIOWrapper(f, "utf-8-sig")):
+                if name in row.get("stop_name", "").lower():
+                    results.append({
+                        "id":   row["stop_id"],
+                        "name": row["stop_name"]
+                    })
+        return jsonify(results[:20])
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 threading.Thread(target=refresh_loop, daemon=True).start()
