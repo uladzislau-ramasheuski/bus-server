@@ -11,7 +11,7 @@ GTFS_URL = "https://www.wroclaw.pl/open-data/87b09b32-f076-4475-8ec9-6020ed1f9ac
 
 STOPS = {
     "575":   "SĘPOLNO",
-    "18002": "Przystanek pracy",
+    "18001": "Przystanek pracy",
 }
 
 stop_data = {sid: [] for sid in STOPS}
@@ -50,7 +50,7 @@ HTML = '''<!DOCTYPE html>
 <div class="header">
   <div class="stop-tabs">
     <button class="tab active" onclick="switchStop('575', this)">SĘPOLNO</button>
-    <button class="tab" onclick="switchStop('18002', this)">Praca</button>
+    <button class="tab" onclick="switchStop('18001', this)">Praca</button>
   </div>
   <div style="display:flex;align-items:center;gap:8px">
     <span class="time" id="clock"></span>
