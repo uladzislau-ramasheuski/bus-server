@@ -11,10 +11,7 @@ GTFS_URL = "https://www.wroclaw.pl/open-data/87b09b32-f076-4475-8ec9-6020ed1f9ac
 
 STOPS = {
     "575":  "SĘPOLNO",
-    "134":  "Glinianki 134",
-    "135":  "Glinianki 135",
-    "1423": "Glinianki 1423",
-    "1424": "Glinianki 1424",
+    "1423": "Glinianki",
 }
 
 stop_data = {sid: [] for sid in STOPS}
